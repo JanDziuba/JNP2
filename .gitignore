@@ -1,0 +1,5 @@
+/front/.idea/
+/front/db.sqlite3
+/users/venv/
+/users/db.sqlite3
+/users/.idea/

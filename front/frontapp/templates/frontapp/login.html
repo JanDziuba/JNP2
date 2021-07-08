@@ -1,0 +1,41 @@
+{% extends "frontapp/base.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static  'css/loginStyle.css' %}">
+    <script src="{% static  'js/login.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="main-section">
+        <div class="login-window">
+            <div class="tabs">
+                <input id="sign-in-tab" type="radio" name="tab" checked>
+                <label for="sign-in-tab" class="sign-in-tab-label">SIGN IN</label>
+                <input id="sign-up-tab" type="radio" name="tab">
+                <label for="sign-up-tab" class="sign-up-tab-label">SIGN UP</label>
+            </div>
+
+            <form class="sign-in-form" action="{% url "action_login" %}" method="post">
+                {% csrf_token %}
+                <label for="username-input" class="username-input-label">USERNAME</label>
+                <input id="username-input" name="username" type="text" required>
+                <label for="password-input" class="password-input-label">PASSWORD</label>
+                <input id="password-input" name="password" type="text" required>
+                <input type="submit" value="SIGN IN">
+                <a href="#forgot">Forgot Password?</a>
+            </form>
+
+            <form class="sign-up-form" action="{% url "action_register" %}" method="post">
+                {% csrf_token %}
+                <label for="username-input" class="label">USERNAME</label>
+                <input id="username-input" name="username" type="text" required>
+                <label for="password-input" class="label">PASSWORD</label>
+                <input id="password-input" name="password" type="text" required>
+                <input type="submit" value="SIGN UP">
+                <a href="#forgot">Already Member?</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+

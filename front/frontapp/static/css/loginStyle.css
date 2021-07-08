@@ -1,0 +1,82 @@
+.main-section {
+  display: grid;
+  grid-template-rows: 10vh auto 10vh;
+  grid-template-columns: 1fr auto 1fr;
+
+}
+
+.login-window {
+  grid-row: 2;
+  grid-column: 2;
+  min-width: 20em;
+  background-color: #283b68;
+  box-shadow: 0 12px 15px 0 #0000003D, 0 17px 50px 0 #00000030;
+  padding: 5em 5em 10em 5em;
+  font: 600 16px/18px 'Open Sans', sans-serif;
+}
+
+#sign-in-tab, #sign-up-tab {
+  display: none;
+}
+
+.tabs {
+  margin-bottom: 1em;
+}
+
+.sign-in-tab-label,
+.sign-up-tab-label {
+  font-size: 1.3em;
+  cursor: pointer;
+  margin-right: 1em;
+}
+
+#sign-in-tab:not(:checked) + .sign-in-tab-label,
+#sign-up-tab:not(:checked) + .sign-up-tab-label {
+  color: #2b2b2b;
+}
+
+#sign-in-tab:checked + .sign-in-tab-label,
+#sign-up-tab:checked + .sign-up-tab-label {
+  border-bottom: 2px solid #1161ee;
+}
+
+label {
+  color: #ececec;
+  font-size: 0.8em;
+}
+
+input {
+  color: #ffffff;
+  background: #FFFFFF19;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 1.5em;
+  padding: 0.8em;
+  margin-bottom: 1em;
+}
+
+input[type=submit] {
+  background: #1161ee;
+  color: #ffffff;
+  width: 100%;
+  border-radius: 1.5em;
+}
+
+input[type=submit]:hover {
+  background-color: #0f58d9;
+}
+
+input[type=submit]:active {
+  transform: scale(0.98);
+}
+
+.sign-up-form {
+  display: none;
+}
+
+a {
+  color: #2b2b2b;
+  text-decoration: none
+}
+
