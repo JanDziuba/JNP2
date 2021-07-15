@@ -3,7 +3,7 @@ import requests
 
 
 def action_login(request):
-    response = requests.post('http://127.0.0.1:8001/api/login', data=request.POST)
+    response = requests.post('http://host.docker.internal:8001/api/login', data=request.POST)
     if response.status_code != 200:
         print("nieudane logowanie") # todo show error in login page
         return redirect('home_view')
@@ -14,7 +14,7 @@ def action_login(request):
 
 
 def action_register(request):
-    response = requests.post('http://127.0.0.1:8001/api/register', data=request.POST)
+    response = requests.post('http://host.docker.internal:8001/api/register', data=request.POST)
     if response.status_code != 200:
         print("nieudana rejestracja") # todo show error in login page
         return redirect('home_view')
