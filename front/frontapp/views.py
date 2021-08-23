@@ -1,27 +1,26 @@
 from django.shortcuts import redirect, render
 import requests
+from django.http import JsonResponse
 
 
 def action_login(request):
-    response = requests.post('http://host.docker.internal:8001/api/login', data=request.POST)
-    if response.status_code != 200:
-        print("nieudane logowanie") # todo show error in login page
-        return redirect('home_view')
+    if request.is_ajax and request.method == "POST":
+        response = requests.post('http://host.docker.internal:8001/api/login', data=request.POST)
+        if response.status_code == 200:
+            request.session['username'] = request.POST['username']
+            request.session['logged_in'] = True
 
-    request.session['username'] = request.POST['username']
-    request.session['logged_in'] = True
-    return redirect('home_view')
+        return JsonResponse(response.json(), status=response.status_code)
 
 
 def action_register(request):
-    response = requests.post('http://host.docker.internal:8001/api/register', data=request.POST)
-    if response.status_code != 200:
-        print("nieudana rejestracja") # todo show error in login page
-        return redirect('home_view')
+    if request.is_ajax and request.method == "POST":
+        response = requests.post('http://host.docker.internal:8001/api/register', data=request.POST)
+        if response.status_code == 200:
+            request.session['username'] = request.POST['username']
+            request.session['logged_in'] = True
 
-    request.session['username'] = request.POST['username']
-    request.session['logged_in'] = True
-    return redirect('home_view')
+        return JsonResponse(response.json(), status=response.status_code)
 
 
 def action_logout(request):

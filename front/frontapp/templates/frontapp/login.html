@@ -16,7 +16,7 @@
                 <label for="sign-up-tab" class="sign-up-tab-label">SIGN UP</label>
             </div>
 
-            <form class="sign-in-form" action="{% url "action_login" %}" method="post">
+            <form class="sign-in-form" action="#" method="post">
                 {% csrf_token %}
                 <label for="username-input" class="username-input-label">USERNAME</label>
                 <input id="username-input" name="username" type="text" required>
@@ -26,7 +26,7 @@
                 <a href="#forgot">Forgot Password?</a>
             </form>
 
-            <form class="sign-up-form" action="{% url "action_register" %}" method="post">
+            <form class="sign-up-form" action="#" method="post">
                 {% csrf_token %}
                 <label for="username-input" class="label">USERNAME</label>
                 <input id="username-input" name="username" type="text" required>
@@ -37,5 +37,54 @@
             </form>
         </div>
     </div>
+
+
+    <script>
+        $(document).ready(function () {
+
+            $(".sign-in-form").submit(function (e) {
+                // preventing from page reload and default actions
+                e.preventDefault();
+                // serialize the data for sending the form data.
+                let serializedData = $(this).serialize();
+                // make POST ajax call
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'action_login' %}",
+                    data: serializedData,
+
+                    success: function (response) {
+                        window.location.replace("{% url 'home_view' %}");
+                    },
+                    error: function (response) {
+                        // alert the error if any error occured
+                        alert(JSON.stringify(response["responseJSON"]));
+                    }
+                })
+            })
+
+            $(".sign-up-form").submit(function (e) {
+                // preventing from page reload and default actions
+                e.preventDefault();
+                // serialize the data for sending the form data.
+                let serializedData = $(this).serialize();
+                // make POST ajax call
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'action_register' %}",
+                    data: serializedData,
+
+                    success: function (response) {
+                        window.location.replace("{% url 'home_view' %}");
+                    },
+                    error: function (response) {
+                        // alert the error if any error occured
+                        alert(JSON.stringify(response["responseJSON"]));
+                    }
+                })
+            })
+
+        })
+    </script>
 {% endblock %}
 

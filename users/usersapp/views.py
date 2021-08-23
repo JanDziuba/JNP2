@@ -12,13 +12,13 @@ def login(request):
         try:
             user_object = User.objects.get(username=request.data['username'])
         except User.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return Response({'error': "wrong username"}, status=status.HTTP_404_NOT_FOUND)
 
         if user_object.password != request.data['password']:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return Response({'error': "wrong password"}, status=status.HTTP_404_NOT_FOUND)
 
         return Response(UserSerializer(user_object).data, status=status.HTTP_200_OK)
-    return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+    return Response({'error': "wrong method"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
 @api_view(['POST'])
@@ -29,4 +29,4 @@ def register(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+    return Response({'error': "wrong method"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
