@@ -1,0 +1,21 @@
+{% extends "frontapp/base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static  'css/homeStyle.css' %}">
+{% endblock %}
+
+{% block content %}
+<div>
+    <div class="offer">
+        <img class="offer-pic" src="{% static  'pics/house1.jpg' %}" alt="" />
+        <div class="offer-desc">
+            <div class="offer-title">{{ product.title }}</div>
+            <div class="offer-price">{{ product.price }}</div>
+            <div class="offer-size">{{ product.size }}</div>
+            <div class="offer-description">{{ product.description }}</div>
+        </div>
+        <a class="detail-link" href="{% url 'home_view' %}">Powrót</a>
+    </div>
+</div>
+{% endblock %}
