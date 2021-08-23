@@ -1,25 +1,27 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="{% static  'css/style.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static  'js/navbar.js' %}"></script>
-    <title>{% block title %}My amazing site{% endblock %}</title>
+    <title>{% block title %}Totodom{% endblock %}</title>
     {% block head %}{% endblock %}
 </head>
 
 <body>
-<nav class="navbar">
-    <div class="brand">Totodom</div>
-    {% if logged_in %}
+    <nav class="navbar">
+        <div class="brand">
+            <a href="{% url 'home_view' %}">Totodom</a>
+        </div>
+        {% if logged_in %}
         <div class="username-dropdown">
             <div class="username">
                 <button class="username-button" onclick="">{{ username }}</button>
             </div>
             <div class="dropdown-menu">
                 <a href="#Profile">Profile</a>
-                <a href="#Settings">Settings</a>
                 <a href="{% url 'action_logout' %}">Log out</a>
             </div>
         </div>
@@ -27,14 +29,15 @@
         <div class="add-offer">
             <a class="add-offer-button" href="{% url 'new_offer_view' %}">Add Offer</a>
         </div>
-    {% else %}
+        {% else %}
         <div class="sign-in">
             <a class="sign-in-button" href="{% url 'login_view' %}">Sign In</a>
         </div>
-    {% endif %}
-</nav>
+        {% endif %}
+    </nav>
 
-{% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 
 </body>
+
 </html>

@@ -2,22 +2,22 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static  'css/newOfferStyle.css' %}">
+<link rel="stylesheet" href="{% static  'css/newOfferStyle.css' %}">
 {% endblock %}
 
 {% block content %}
-    <div class="main-section">
-        <form class="offer-form" action="">
-            {% csrf_token %}
-            <label for="offer-title" class="offer-title-label">Title</label>
-            <input name="offer-title" id="offer-title" class="offer-title" type="text">
-            <label for="offer-price" class="offer-price-label">Price</label>
-            <input name="offer-price" id="offer-price" class="offer-price" type="number" step=".01">
-            <label for="offer-size" class="offer-size-label">Size</label>
-            <input name="offer-size" id="offer-size" class="offer-size" type="number" step=".01">
-            <label for="description" class="description-label">Description</label>
-            <textarea name="description" id="description" class="description" cols="100" rows="20"></textarea>
-            <input class="submit" type="submit">
-        </form>
-    </div>
+<div class="main-section">
+    <form class="offer-form" action="{% url 'action_add_product' %}" method="post">
+        {% csrf_token %}
+        <label for="offer-title" class="offer-title-label">Title</label>
+        <input name="title" id="offer-title" class="offer-title" type="text">
+        <label for="offer-price" class="offer-price-label">Price</label>
+        <input name="price" id="offer-price" class="offer-price" type="number" step=".01">
+        <label for="offer-size" class="offer-size-label">Size</label>
+        <input name="size" id="offer-size" class="offer-size" type="number" step=".01">
+        <label for="description" class="description-label">Description</label>
+        <textarea name="description" id="description" class="description" cols="100" rows="20"></textarea>
+        <input class="submit" type="submit">
+    </form>
+</div>
 {% endblock %}

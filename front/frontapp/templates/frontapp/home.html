@@ -2,36 +2,36 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static  'css/homeStyle.css' %}">
+<link rel="stylesheet" href="{% static  'css/homeStyle.css' %}">
 {% endblock %}
 
 {% block content %}
-    <div class="main-section">
-        <div class="offers">
+<div class=filters-section>
+    <form class="filter-form" method="post">
+        <label for="price-from" class="price-from">Price from:</label>
+        <input name="price-from" id="price-from" class="price-from" type="number" step=".01">
+        <label for="price-to" class="price-to">Price to:</label>
+        <input name="price-to" id="price-to" class="price-to" type="number" step=".01">
+        <label for="size-from" class="size-from">Size from:</label>
+        <input name="size-from" id="size-from" class="size-from" type="number" step=".01">
+        <label for="size-to" class="size-to">Size to:</label>
+        <input name="size-to" id="size-to" class="size-to" type="number" step=".01">
+        <input class="submit" type="submit">
+    </form>
+</div>
+<div class="main-section">
+    <div class="offers">
+        {% for product in products %}
             <div class="offer">
-                <img class="offer-pic" src="{% static  'pics/house1.jpg' %}" alt=""/>
+                <img class="offer-pic" src="{% static  'pics/house1.jpg' %}" alt="" />
                 <div class="offer-desc">
-                    <div class="offer-title">SPRZEDAM DOM</div>
-                    <div class="offer-price">55555555555zł</div>
-                    <div class="offer-size">100m^2</div>
+                    <div class="offer-title">{{ product.title }}</div>
+                    <div class="offer-price">{{ product.price }}</div>
+                    <div class="offer-size">{{ product.size }}</div>
+                    <div class="offer-description">{{ product.description }}</div>
                 </div>
+                <a class="detail-link" href="{% url 'product_detail_view' product.id %}">Szczegóły</a>
             </div>
-            <div class="offer">
-                <img class="offer-pic" src="{% static  'pics/house2.jpg' %}" alt=""/>
-                <div class="offer-desc">
-                    <div class="offer-title">WYNAJMĘ DOM</div>
-                    <div class="offer-price">9999zł/mc</div>
-                    <div class="offer-size">1040m^2</div>
-                </div>
-            </div>
-            <div class="offer">
-                <img class="offer-pic" src="{% static  'pics/house3.jpg' %}" alt=""/>
-                <div class="offer-desc">
-                    <div class="offer-title">Bez prowizji LUX</div>
-                    <div class="offer-price">1111111zł</div>
-                    <div class="offer-size">1440m^2</div>
-                </div>
-            </div>
-        </div>
-    </div>
+        {% endfor %}
+</div>
 {% endblock %}
