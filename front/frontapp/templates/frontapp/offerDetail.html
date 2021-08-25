@@ -1,0 +1,29 @@
+{% extends "frontapp/base.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static  'css/homeStyle.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div>
+        <div class="offer">
+            <img class="offer-pic" src="{% static  'pics/house1.jpg' %}" alt=""/>
+            <div class="offer-desc">
+                <div class="offer-title">title: {{ offer.title }}</div>
+                <div class="offer-price">price: {{ offer.price }}</div>
+                <div class="offer-size">size: {{ offer.size }}</div>
+                <div class="offer-description">description: {{ offer.description }}</div>
+                <div class="seller">seller: {{ offer.seller_username }}</div>
+            </div>
+            <a class="detail-link" href="{% url 'home_view' %}">Go Back</a>
+        </div>
+
+        <form class="message-form" action="#" method="post">
+            {% csrf_token %}
+            <label for="message" class="message-label">message</label>
+            <textarea name="message" id="message" class="message" cols="40" rows="20"></textarea>
+            <input class="submit" type="submit" value="send message">
+        </form>
+    </div>
+{% endblock %}

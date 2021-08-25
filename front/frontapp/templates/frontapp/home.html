@@ -2,36 +2,76 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static  'css/homeStyle.css' %}">
+    <link rel="stylesheet" href="{% static  'css/homeStyle.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class=filters-section>
-    <form class="filter-form" method="post">
-        <label for="price-from" class="price-from">Price from:</label>
-        <input name="price-from" id="price-from" class="price-from" type="number" step=".01">
-        <label for="price-to" class="price-to">Price to:</label>
-        <input name="price-to" id="price-to" class="price-to" type="number" step=".01">
-        <label for="size-from" class="size-from">Size from:</label>
-        <input name="size-from" id="size-from" class="size-from" type="number" step=".01">
-        <label for="size-to" class="size-to">Size to:</label>
-        <input name="size-to" id="size-to" class="size-to" type="number" step=".01">
-        <input class="submit" type="submit">
-    </form>
-</div>
-<div class="main-section">
-    <div class="offers">
-        {% for product in products %}
-            <div class="offer">
-                <img class="offer-pic" src="{% static  'pics/house1.jpg' %}" alt="" />
-                <div class="offer-desc">
-                    <div class="offer-title">{{ product.title }}</div>
-                    <div class="offer-price">{{ product.price }}</div>
-                    <div class="offer-size">{{ product.size }}</div>
-                    <div class="offer-description">{{ product.description }}</div>
+    <div class=filters-section>
+        <form class="filter-form" method="get">
+            {% csrf_token %}
+            <label for="price-from" class="price-from">Price from:</label>
+            <input name="price-from" id="price-from" class="price-from" type="number" step=".01">
+            <label for="price-to" class="price-to">Price to:</label>
+            <input name="price-to" id="price-to" class="price-to" type="number" step=".01">
+            <label for="size-from" class="size-from">Size from:</label>
+            <input name="size-from" id="size-from" class="size-from" type="number" step=".01">
+            <label for="size-to" class="size-to">Size to:</label>
+            <input name="size-to" id="size-to" class="size-to" type="number" step=".01">
+            <input class="submit" type="submit">
+        </form>
+    </div>
+    <div class="main-section">
+        <div class="offers">
+            {% for offer in offers %}
+                <div class="offer">
+                    <img class="offer-pic" src="{% static "pics/house1.jpg" %}" alt=""/>
+                    <div class="offer-desc">
+                        <div class="offer-title">title: {{ offer.title }}</div>
+                        <div class="offer-price">price: {{ offer.price }}</div>
+                        <div class="offer-size">size: {{ offer.size }}</div>
+                        <div class="offer-description">description: {{ offer.description }}</div>
+                    </div>
+                    <a class="detail-link" href="{% url "offer_detail_view" offer.id %}">Details</a>
                 </div>
-                <a class="detail-link" href="{% url 'product_detail_view' product.id %}">Szczegóły</a>
-            </div>
-        {% endfor %}
-</div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+
+            $(".filter-form").submit(function (e) {
+                e.preventDefault();
+                let serializedData = $(this).serialize();
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://127.0.0.1:8002/api/get_offers',
+                    data: serializedData,
+
+                    success: function (response) {
+                        let offers = response['data'];
+                        let html = "";
+
+                        $.each(offers, function (index, offer) {
+                            html +=  '<div class="offer">' +
+                            '<img class="offer-pic" src="{% static 'pics/house1.jpg' %}" alt=""/>' +
+                            '<div class="offer-desc">' +
+                            '<div class="offer-title">title: ' + offer['title'] + '</div>' +
+                            '<div class="offer-price">price: ' + offer['price'] + '</div>' +
+                            '<div class="offer-size">size: ' + offer['size'] + '</div>' +
+                            '<div class="offer-description">description: ' + offer['description'] + '</div>' +
+                            '</div>' +
+                            '<a class="detail-link" href="/detail/' + offer['id'] + '">Details</a>' +
+                            '</div>';
+                        });
+
+                        $(".offers").html(html);
+                    },
+                    error: function (response) {
+                        alert(JSON.stringify(response["responseJSON"]));
+                    }
+                })
+            })
+        })
+    </script>
 {% endblock %}

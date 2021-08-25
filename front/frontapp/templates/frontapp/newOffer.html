@@ -2,22 +2,46 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static  'css/newOfferStyle.css' %}">
+    <link rel="stylesheet" href="{% static  'css/newOfferStyle.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="main-section">
-    <form class="offer-form" action="{% url 'action_add_product' %}" method="post">
-        {% csrf_token %}
-        <label for="offer-title" class="offer-title-label">Title</label>
-        <input name="title" id="offer-title" class="offer-title" type="text">
-        <label for="offer-price" class="offer-price-label">Price</label>
-        <input name="price" id="offer-price" class="offer-price" type="number" step=".01">
-        <label for="offer-size" class="offer-size-label">Size</label>
-        <input name="size" id="offer-size" class="offer-size" type="number" step=".01">
-        <label for="description" class="description-label">Description</label>
-        <textarea name="description" id="description" class="description" cols="100" rows="20"></textarea>
-        <input class="submit" type="submit">
-    </form>
-</div>
+    <div class="main-section">
+        <form class="offer-form" action=# method="post">
+            {% csrf_token %}
+            <label for="offer-title" class="offer-title-label">Title</label>
+            <input name="title" id="offer-title" class="offer-title" type="text" required>
+            <label for="offer-price" class="offer-price-label">Price</label>
+            <input name="price" id="offer-price" class="offer-price" type="number" step=".01" required>
+            <label for="offer-size" class="offer-size-label">Size</label>
+            <input name="size" id="offer-size" class="offer-size" type="number" step=".01" required>
+            <label for="description" class="description-label">Description</label>
+            <textarea name="description" id="description" class="description" cols="100" rows="20" required></textarea>
+            <input type="hidden" name="seller_username" value={{ username }}>
+            <input type="hidden" name="seller_id" value={{ user_id }}>
+            <input class="submit" type="submit">
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+
+            $(".offer-form").submit(function (e) {
+                e.preventDefault();
+                let serializedData = $(this).serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://127.0.0.1:8002/api/add_offer',
+                    data: serializedData,
+
+                    success: function (response) {
+                        window.location.replace("{% url 'home_view' %}");
+                    },
+                    error: function (response) {
+                        alert(JSON.stringify(response["responseJSON"]));
+                    }
+                })
+            })
+        })
+    </script>
 {% endblock %}
