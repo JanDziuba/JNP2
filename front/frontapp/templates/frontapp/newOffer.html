@@ -12,9 +12,9 @@
             <label for="offer-title" class="offer-title-label">Title</label>
             <input name="title" id="offer-title" class="offer-title" type="text" required>
             <label for="offer-price" class="offer-price-label">Price</label>
-            <input name="price" id="offer-price" class="offer-price" type="number" step=".01" required>
+            <input name="price" id="offer-price" class="offer-price" type="number" step=".01" required min="0">
             <label for="offer-size" class="offer-size-label">Size</label>
-            <input name="size" id="offer-size" class="offer-size" type="number" step=".01" required>
+            <input name="size" id="offer-size" class="offer-size" type="number" step=".01" required min="0">
             <label for="description" class="description-label">Description</label>
             <textarea name="description" id="description" class="description" cols="100" rows="20" required></textarea>
             <input type="hidden" name="seller_username" value={{ username }}>
