@@ -5,7 +5,7 @@ from django.http import JsonResponse
 
 def action_login(request):
     if request.is_ajax and request.method == "POST":
-        response = requests.post('http://host.docker.internal:8001/api/login', data=request.POST)
+        response = requests.post('http://users/api/login', data=request.POST)
         if response.status_code == 200:
             request.session['logged_in'] = True
             request.session['user_id'] = response.json()['id']
@@ -16,7 +16,7 @@ def action_login(request):
 
 def action_register(request):
     if request.is_ajax and request.method == "POST":
-        response = requests.post('http://host.docker.internal:8001/api/register', data=request.POST)
+        response = requests.post('http://users/api/register', data=request.POST)
         if response.status_code == 200:
             request.session['logged_in'] = True
             request.session['user_id'] = response.json()['id']
@@ -38,14 +38,14 @@ def get_context_from_session(request):
 
 def home_view(request):
     context = get_context_from_session(request)
-    response = requests.get('http://host.docker.internal:8002/api/get_offers', data=request.GET)
+    response = requests.get('http://offers/api/get_offers', data=request.GET)
     context['offers'] = response.json()['data']
     return render(request, 'frontapp/home.html', context)
 
 
 def offer_detail_view(request, id):
     context = get_context_from_session(request)
-    response = requests.get(f'http://host.docker.internal:8002/api/get_offer/{id}', data=request.GET)
+    response = requests.get(f'http://offers/api/get_offer/{id}', data=request.GET)
     context['offer'] = response.json()['data']
     return render(request, 'frontapp/offerDetail.html', context)
 
