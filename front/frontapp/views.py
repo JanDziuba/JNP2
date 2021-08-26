@@ -34,13 +34,13 @@ def action_logout(request):
 
 def action_get_offers(request):
     if request.is_ajax and request.method == "GET":
-        response = requests.post('http://offers/api/get_offers', data=request.GET)
+        response = requests.get('http://offers/api/get_offers', data=request.GET)
         return JsonResponse(response.json(), status=response.status_code)
     return JsonResponse({'error': 'wrong method'}, status=405)
 
 
 def action_add_offer(request):
-    if request.is_ajax and request.method == "GET":
+    if request.is_ajax and request.method == "POST":
         response = requests.post('http://offers/api/add_offer', data=request.POST)
         return JsonResponse(response.json(), status=response.status_code)
     return JsonResponse({'error': 'wrong method'}, status=405)
