@@ -12,6 +12,7 @@ def action_login(request):
             request.session['username'] = response.json()['username']
 
         return JsonResponse(response.json(), status=response.status_code)
+    return JsonResponse({'error': 'wrong method'}, status=405)
 
 
 def action_register(request):
@@ -23,11 +24,26 @@ def action_register(request):
             request.session['username'] = response.json()['username']
 
         return JsonResponse(response.json(), status=response.status_code)
+    return JsonResponse({'error': 'wrong method'}, status=405)
 
 
 def action_logout(request):
     request.session['logged_in'] = False
     return redirect('home_view')
+
+
+def action_get_offers(request):
+    if request.is_ajax and request.method == "GET":
+        response = requests.post('http://offers/api/get_offers', data=request.GET)
+        return JsonResponse(response.json(), status=response.status_code)
+    return JsonResponse({'error': 'wrong method'}, status=405)
+
+
+def action_add_offer(request):
+    if request.is_ajax and request.method == "GET":
+        response = requests.post('http://offers/api/add_offer', data=request.POST)
+        return JsonResponse(response.json(), status=response.status_code)
+    return JsonResponse({'error': 'wrong method'}, status=405)
 
 
 def get_context_from_session(request):
