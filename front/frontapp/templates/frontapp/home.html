@@ -45,7 +45,7 @@
                 let serializedData = $(this).serialize();
                 $.ajax({
                     type: 'GET',
-                    url: 'http://127.0.0.1:8002/api/get_offers',
+                    url: "{% url 'action_get_offers' %}",
                     data: serializedData,
 
                     success: function (response) {

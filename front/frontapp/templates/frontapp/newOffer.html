@@ -31,7 +31,7 @@
                 let serializedData = $(this).serialize();
                 $.ajax({
                     type: 'POST',
-                    url: 'http://127.0.0.1:8002/api/add_offer',
+                    url: "{% url 'action_add_offer' %}",
                     data: serializedData,
 
                     success: function (response) {
