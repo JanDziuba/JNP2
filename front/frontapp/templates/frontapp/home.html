@@ -44,7 +44,7 @@
                 e.preventDefault();
                 let serializedData = $(this).serialize();
                 $.ajax({
-                    type: 'POST',
+                    type: 'GET',
                     url: "{% url 'action_get_offers' %}",
                     data: serializedData,
 

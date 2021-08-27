@@ -33,8 +33,8 @@ def action_logout(request):
 
 
 def action_get_offers(request):
-    if request.is_ajax and request.method == "POST":
-        response = requests.post('http://offers/api/get_offers', data=request.POST)
+    if request.is_ajax and request.method == "GET":
+        response = requests.get('http://offers/api/get_offers', params=request.GET)
         return JsonResponse(response.json(), status=response.status_code)
     return JsonResponse({'error': 'wrong method'}, status=405)
 
@@ -54,14 +54,14 @@ def get_context_from_session(request):
 
 def home_view(request):
     context = get_context_from_session(request)
-    response = requests.post('http://offers/api/get_offers', data=request.POST)
+    response = requests.get('http://offers/api/get_offers')
     context['offers'] = response.json()['data']
     return render(request, 'frontapp/home.html', context)
 
 
 def offer_detail_view(request, id):
     context = get_context_from_session(request)
-    response = requests.get(f'http://offers/api/get_offer/{id}', data=request.GET)
+    response = requests.get(f'http://offers/api/get_offer/{id}')
     context['offer'] = response.json()['data']
     return render(request, 'frontapp/offerDetail.html', context)
 

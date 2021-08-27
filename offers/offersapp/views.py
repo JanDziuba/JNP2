@@ -15,12 +15,12 @@ def add_offer(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 def get_offers(request):
-    price_from = request.POST.get('price-from', 0)
-    price_to = request.POST.get('price-to', float('inf'))
-    size_from = request.POST.get('size-from', 0)
-    size_to = request.POST.get('size-to', float('inf'))
+    price_from = request.GET.get('price-from', 0)
+    price_to = request.GET.get('price-to', float('inf'))
+    size_from = request.GET.get('size-from', 0)
+    size_to = request.GET.get('size-to', float('inf'))
 
     if price_from == '':
         price_from = 0
