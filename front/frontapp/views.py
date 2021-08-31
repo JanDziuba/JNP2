@@ -74,3 +74,7 @@ def login_view(request):
 def new_offer_view(request):
     context = get_context_from_session(request)
     return render(request, 'frontapp/newOffer.html', context)
+
+def room_view(request):
+    context = get_context_from_session(request)
+    return render(request, 'frontapp/room.html', context)
