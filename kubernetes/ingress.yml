@@ -29,3 +29,17 @@ spec:
             name: offers
             port:
               number: 80
+      - path: /chat
+        pathType: Prefix
+        backend:
+          service:
+            name: chat
+            port:
+              number: 80
+      - path: /redis
+        pathType: Prefix
+        backend:
+          service:
+            name: redis
+            port:
+              number: 80

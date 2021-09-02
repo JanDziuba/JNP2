@@ -42,15 +42,15 @@
 
             $(".filter-form").submit(function (e) {
                 e.preventDefault();
-                let serializedData = $(this).serialize();
-                let url = 'http://' + location.hostname + '/offers/get_offers';
+                const serializedData = $(this).serialize();
+                const url = 'http://' + location.hostname + '/offers/get_offers';
                 $.ajax({
                     type: 'GET',
                     url: url,
                     data: serializedData,
 
                     success: function (response) {
-                        let offers = response['data'];
+                        const offers = response['data'];
                         let html = "";
 
                         $.each(offers, function (index, offer) {

@@ -28,8 +28,8 @@
 
             $(".offer-form").submit(function (e) {
                 e.preventDefault();
-                let serializedData = $(this).serialize();
-                let url = 'http://' + location.hostname + '/offers/add_offer';
+                const serializedData = $(this).serialize();
+                const url = 'http://' + location.hostname + '/offers/add_offer';
                 $.ajax({
                     type: 'POST',
                     url: url,

@@ -43,11 +43,8 @@
         $(document).ready(function () {
 
             $(".sign-in-form").submit(function (e) {
-                // preventing from page reload and default actions
                 e.preventDefault();
-                // serialize the data for sending the form data.
-                let serializedData = $(this).serialize();
-                // make POST ajax call
+                const serializedData = $(this).serialize();
                 $.ajax({
                     type: 'POST',
                     url: "{% url 'action_login' %}",
@@ -63,11 +60,8 @@
             })
 
             $(".sign-up-form").submit(function (e) {
-                // preventing from page reload and default actions
                 e.preventDefault();
-                // serialize the data for sending the form data.
-                let serializedData = $(this).serialize();
-                // make POST ajax call
+                const serializedData = $(this).serialize();
                 $.ajax({
                     type: 'POST',
                     url: "{% url 'action_register' %}",
