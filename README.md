@@ -1,6 +1,6 @@
 ## Usage
 
-In /front run
+run
 
 ```bash
 bash build_services.sh
