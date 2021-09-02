@@ -1,0 +1,10 @@
+# kubectl delete -f https://bit.ly/k4k8s # delete Kong API gateway
+kubectl delete ingress ingress
+
+kubectl delete svc front
+kubectl delete svc users
+kubectl delete svc offers
+
+kubectl delete deployment front
+kubectl delete deployment users
+kubectl delete deployment offers

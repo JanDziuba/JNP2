@@ -29,9 +29,10 @@
             $(".offer-form").submit(function (e) {
                 e.preventDefault();
                 let serializedData = $(this).serialize();
+                let url = 'http://' + location.hostname + '/offers/add_offer';
                 $.ajax({
                     type: 'POST',
-                    url: "{% url 'action_add_offer' %}",
+                    url: url,
                     data: serializedData,
 
                     success: function (response) {
