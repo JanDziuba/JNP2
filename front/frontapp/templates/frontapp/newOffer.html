@@ -17,8 +17,8 @@
             <input name="size" id="offer-size" class="offer-size" type="number" step=".01" required min="0">
             <label for="description" class="description-label">Description</label>
             <textarea name="description" id="description" class="description" cols="100" rows="20" required></textarea>
-            <input type="hidden" name="seller_username" value=0>
-            <input type="hidden" name="seller_id" value=0>
+            <input type="hidden" name="seller_username">
+            <input type="hidden" name="seller_id">
             <input class="submit" type="submit">
         </form>
     </div>
@@ -26,8 +26,8 @@
     <script>
         $(document).ready(function () {
 
-            $('input.seller_username').val(sessionStorage.getItem("username"));
-            $('input.seller_id').val(Number(sessionStorage.getItem("user_id")));
+            $('input[name=seller_username]').val(sessionStorage.getItem("username"));
+            $('input[name=seller_id]').val(Number(sessionStorage.getItem("user_id")));
 
             $(".offer-form").submit(function (e) {
                 e.preventDefault();
