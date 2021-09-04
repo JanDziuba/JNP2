@@ -8,7 +8,4 @@ urlpatterns = [
     path('new-offer/', new_offer_view, name="new_offer_view"),
     path('room/', room_view, name="room_view"),
     path('detail/<int:id>', offer_detail_view, name="offer_detail_view"),
-    path('action/login/', action_login, name="action_login"),
-    path('action/register/', action_register, name="action_register"),
-    path('action/logout/', action_logout, name="action_logout"),
 ]

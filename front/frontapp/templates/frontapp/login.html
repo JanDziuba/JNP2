@@ -38,19 +38,22 @@
         </div>
     </div>
 
-
     <script>
         $(document).ready(function () {
 
             $(".sign-in-form").submit(function (e) {
                 e.preventDefault();
                 const serializedData = $(this).serialize();
+                const url = 'http://' + location.hostname + '/users/login';
                 $.ajax({
                     type: 'POST',
-                    url: "{% url 'action_login' %}",
+                    url: url,
                     data: serializedData,
 
                     success: function (response) {
+                        sessionStorage.setItem("logged_in", "true");
+                        sessionStorage.setItem("user_id", response['id']);
+                        sessionStorage.setItem("username", response['username']);
                         window.location.replace("{% url 'home_view' %}");
                     },
                     error: function (response) {
@@ -62,12 +65,16 @@
             $(".sign-up-form").submit(function (e) {
                 e.preventDefault();
                 const serializedData = $(this).serialize();
+                const url = 'http://' + location.hostname + '/users/register';
                 $.ajax({
                     type: 'POST',
-                    url: "{% url 'action_register' %}",
+                    url: url,
                     data: serializedData,
 
                     success: function (response) {
+                        sessionStorage.setItem("logged_in", "true");
+                        sessionStorage.setItem("user_id", response['id']);
+                        sessionStorage.setItem("username", response['username']);
                         window.location.replace("{% url 'home_view' %}");
                     },
                     error: function (response) {
@@ -75,7 +82,6 @@
                     }
                 })
             })
-
         })
     </script>
 {% endblock %}
