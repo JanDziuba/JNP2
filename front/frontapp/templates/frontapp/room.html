@@ -2,14 +2,17 @@
 {% load static %}
 
 {% block head %}
+    <link rel="stylesheet" href="{% static  'css/roomStyle.css' %}">
     <meta charset="utf-8" />
     <title>Chat Room</title>
 {% endblock %}
 
 {% block content %}
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
-    <input id="chat-message-input" type="text" size="100"><br>
-    <input id="chat-message-submit" type="button" value="Send">
+    <div class="chat-container">
+        <ul id="chat-log"></ul></br>
+        <input id="chat-message-input" type="text" size="100"><br>
+        <input id="chat-message-submit" class="button color-success" type="button" value="Send message">
+    </div>
     <script>
         const roomName = 'room'
 
@@ -19,7 +22,9 @@
 
         chatSocket.onmessage = function (e) {
             const data = JSON.parse(e.data);
-            document.querySelector('#chat-log').value += (data.user + ' ' + data.message + '\n');
+            let li = document.createElement('li');
+            li.textContent = data.user + ' writes: ' + data.message;
+            document.querySelector('#chat-log').appendChild(li);
         };
 
         chatSocket.onclose = function (e) {
