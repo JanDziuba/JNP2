@@ -9,15 +9,25 @@
     <div class=filters-section>
         <form class="filter-form" method="get">
             {% csrf_token %}
-            <label for="price-from" class="price-from">Price from:</label>
-            <input name="price-from" id="price-from" class="price-from" type="number" step=".01" min="0">
-            <label for="price-to" class="price-to">Price to:</label>
-            <input name="price-to" id="price-to" class="price-to" type="number" step=".01" min="0">
-            <label for="size-from" class="size-from">Size from:</label>
-            <input name="size-from" id="size-from" class="size-from" type="number" step=".01" min="0">
-            <label for="size-to" class="size-to">Size to:</label>
-            <input name="size-to" id="size-to" class="size-to" type="number" step=".01" min="0">
-            <input class="submit" type="submit">
+            <div class="filter-form-label">
+                Price
+            </div>
+            <div class="filter-form-row">
+                Min
+                <input name="price-from" id="price-from" class="price-from" type="number" step=".01" min="0">
+                Max
+                <input name="price-to" id="price-to" class="price-to" type="number" step=".01" min="0">
+            </div>
+            <div class="filter-form-label">
+                Size
+            </div>
+            <div class="filter-form-row">
+                Min
+                <input name="size-from" id="size-from" class="size-from" type="number" step=".01" min="0">
+                Max
+                <input name="size-to" id="size-to" class="size-to" type="number" step=".01" min="0">
+            </div>
+            <input class="button color-success" type="submit" value="Search">
         </form>
     </div>
     <div class="main-section">
@@ -26,10 +36,9 @@
                 <div class="offer">
                     <img class="offer-pic" src="{% static "pics/house1.jpg" %}" alt=""/>
                     <div class="offer-desc">
-                        <div class="offer-title">title: {{ offer.title }}</div>
-                        <div class="offer-price">price: {{ offer.price }}</div>
-                        <div class="offer-size">size: {{ offer.size }}</div>
-                        <div class="offer-description">description: {{ offer.description }}</div>
+                        <div class="offer-title">{{ offer.title }}</div>
+                        <div class="offer-price">{{ offer.price }}zł</div>
+                        <div class="offer-size">{{ offer.size }}m<sup>2</sup></div>
                     </div>
                     <a class="detail-link" href="{% url "offer_detail_view" offer.id %}">Details</a>
                 </div>

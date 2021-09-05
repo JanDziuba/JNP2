@@ -4,6 +4,9 @@
 
 <head>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'js/navbar.js' %}"></script>
     <title>{% block title %}Totodom{% endblock %}</title>
@@ -17,12 +20,12 @@
     </div>
 
     <div class="sign-in">
-        <a class="sign-in-button" href="{% url 'login_view' %}">Sign In</a>
+        <a class="button color-success" href="{% url 'login_view' %}">Sign In</a>
     </div>
 
     <div class="username-dropdown">
         <div class="username">
-            <button class="username-button" onclick="">#</button>
+            <button class="button username-button" onclick="">#</button>
         </div>
         <div class="dropdown-menu">
             <a href="#">My Offers</a>
@@ -33,7 +36,7 @@
     </div>
 
     <div class="add-offer">
-        <a class="add-offer-button" href="{% url 'new_offer_view' %}">Add Offer</a>
+        <a class="button color-success" href="{% url 'new_offer_view' %}">Add Offer</a>
     </div>
 </nav>
 
