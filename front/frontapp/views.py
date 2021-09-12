@@ -77,4 +77,6 @@ def new_offer_view(request):
 
 def room_view(request):
     context = get_context_from_session(request)
+    response = requests.get('http://host.docker.internal:8003/api/get_messages')
+    context['messages'] = response.json()['data']
     return render(request, 'frontapp/room.html', context)
