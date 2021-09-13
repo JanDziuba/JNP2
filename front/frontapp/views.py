@@ -23,4 +23,6 @@ def new_offer_view(request):
 
 
 def room_view(request):
-    return render(request, 'frontapp/room.html')
+    response = requests.get('http://chat/chat/get_messages')
+    context = {'messages': response.json()['data']}
+    return render(request, 'frontapp/room.html', context)
