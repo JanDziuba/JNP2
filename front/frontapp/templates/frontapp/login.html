@@ -22,7 +22,7 @@
                 <input id="username-input" name="username" type="text" required>
                 <label for="password-input" class="password-input-label">PASSWORD</label>
                 <input id="password-input" name="password" type="text" required>
-                <input type="submit" value="SIGN IN">
+                <input type="submit" class="button color-success" value="SIGN IN">
                 <a href="#forgot">Forgot Password?</a>
             </form>
 
@@ -32,28 +32,28 @@
                 <input id="username-input" name="username" type="text" required>
                 <label for="password-input" class="label">PASSWORD</label>
                 <input id="password-input" name="password" type="text" required>
-                <input type="submit" value="SIGN UP">
+                <input type="submit" class="button color-success" value="SIGN UP">
                 <a href="#forgot">Already Member?</a>
             </form>
         </div>
     </div>
 
-
     <script>
         $(document).ready(function () {
 
             $(".sign-in-form").submit(function (e) {
-                // preventing from page reload and default actions
                 e.preventDefault();
-                // serialize the data for sending the form data.
-                let serializedData = $(this).serialize();
-                // make POST ajax call
+                const serializedData = $(this).serialize();
+                const url = 'http://' + location.hostname + '/users/login';
                 $.ajax({
                     type: 'POST',
-                    url: "{% url 'action_login' %}",
+                    url: url,
                     data: serializedData,
 
                     success: function (response) {
+                        sessionStorage.setItem("logged_in", "true");
+                        sessionStorage.setItem("user_id", response['id']);
+                        sessionStorage.setItem("username", response['username']);
                         window.location.replace("{% url 'home_view' %}");
                     },
                     error: function (response) {
@@ -63,17 +63,18 @@
             })
 
             $(".sign-up-form").submit(function (e) {
-                // preventing from page reload and default actions
                 e.preventDefault();
-                // serialize the data for sending the form data.
-                let serializedData = $(this).serialize();
-                // make POST ajax call
+                const serializedData = $(this).serialize();
+                const url = 'http://' + location.hostname + '/users/register';
                 $.ajax({
                     type: 'POST',
-                    url: "{% url 'action_register' %}",
+                    url: url,
                     data: serializedData,
 
                     success: function (response) {
+                        sessionStorage.setItem("logged_in", "true");
+                        sessionStorage.setItem("user_id", response['id']);
+                        sessionStorage.setItem("username", response['username']);
                         window.location.replace("{% url 'home_view' %}");
                     },
                     error: function (response) {
@@ -81,7 +82,6 @@
                     }
                 })
             })
-
         })
     </script>
 {% endblock %}

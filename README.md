@@ -1,15 +1,13 @@
 ## Usage
 
-In /front run
+run
 
 ```bash
-docker-compose up
+bash build_services.sh
 ```
 
-In /users run
+Then go to EXTERNAL-IP given by command
 
 ```bash
-docker-compose up
+kubectl -n kong get service kong-proxy
 ```
-
-Then go to http://127.0.0.1:8000/
