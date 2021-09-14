@@ -66,10 +66,9 @@
                             html +=  '<div class="offer">' +
                             '<img class="offer-pic" src="{% static 'pics/house1.jpg' %}" alt=""/>' +
                             '<div class="offer-desc">' +
-                            '<div class="offer-title">title: ' + offer['title'] + '</div>' +
-                            '<div class="offer-price">price: ' + offer['price'] + '</div>' +
-                            '<div class="offer-size">size: ' + offer['size'] + '</div>' +
-                            '<div class="offer-description">description: ' + offer['description'] + '</div>' +
+                            '<div class="offer-title">' + offer['title'] + '</div>' +
+                            '<div class="offer-price">' + offer['price'] + 'zł</div>' +
+                            '<div class="offer-size">' + offer['size'] + 'm<sup>2</sup></div>' +
                             '</div>' +
                             '<a class="detail-link" href="/detail/' + offer['id'] + '">Details</a>' +
                             '</div>';
