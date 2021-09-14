@@ -12,8 +12,8 @@ Then go to EXTERNAL-IP given by command
 kubectl -n kong get service kong-proxy
 ```
 
-![alt sign-in](/screens/SignIn.png)
-![alt home](/screens/Home.png)
-![alt add-offer](/screens/AddOffer.png)
-![alt offer-detail](/screens/OfferDetail.png)
-![alt chat](/screens/Chat.png)
+![sign-in](screens/SignIn.png)
+![home](screens/Home.png)
+![add-offer](screens/AddOffer.png)
+![offer-detail](screens/OfferDetail.png)
+![chat](screens/Chat.png)
