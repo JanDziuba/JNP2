@@ -1,3 +1,5 @@
+Microservice based web app using Django Docker and Kubernetes. Deployed to Google Cloud.
+
 ## Usage
 
 run
